@@ -57,7 +57,11 @@ function ResultCard({ result }) {
         {fields.map(([key, item]) => (
           <article className="answer-card" key={key}>
             <div className="answer-top"><span>{item.title || key}</span><em>{Math.round((item.confidence || 0) * 100)}% sûr</em></div>
-            <strong className={typeof item.answer === 'boolean' ? (item.answer ? 'yes' : 'no') : ''}>{formatAnswer(item.answer)}</strong>
+            {typeof item.answer === 'boolean' ? (
+              <strong className={item.answer ? 'yes' : 'no'}>{formatAnswer(item.answer)}</strong>
+            ) : (
+              <span className="answer-text">{formatAnswer(item.answer)}</span>
+            )}
             <p>{item.reasoning}</p>
             <ul>{(item.evidence || []).map((evidence, i) => <li key={i}>{evidence}</li>)}</ul>
           </article>

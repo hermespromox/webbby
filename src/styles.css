@@ -67,9 +67,10 @@ input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(25
 .answer-top code{background:#ffe9de;color:#9f2600}
 .answer-top span{display:block;font-size:13px;color:#9f2600;font-weight:900;text-transform:uppercase;letter-spacing:.07em}
 .answer-top em{font-style:normal;color:#865441;font-size:12px;font-weight:800}
-.answer-card strong{display:block;font-size:30px;line-height:1;color:var(--strong);letter-spacing:-.035em;overflow-wrap:anywhere}
+.answer-card strong{display:block;font-size:22px;line-height:1.15;color:var(--strong);letter-spacing:-.03em;overflow-wrap:anywhere}
 .answer-card strong.yes{color:#148500}
 .answer-card strong.no{color:#b62f00}
+.answer-card .answer-text{display:block;font-size:16px;font-weight:400;line-height:1.45;color:var(--strong)}
 .answer-card p{color:#653a2d;line-height:1.45;margin:12px 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .answer-card ul{margin:0;padding-left:18px;color:#80513f;line-height:1.45}
 .answer-card li+li{margin-top:6px}
