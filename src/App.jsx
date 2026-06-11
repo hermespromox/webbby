@@ -40,33 +40,32 @@ function ResultCard({ result }) {
   if (!result) return null;
   const fields = Object.entries(result.analysis.fields || {});
   return (
-    <section className="result-card ux-result" id="result">
-      <div className="section-head compact">
-        <div>
-          <span className="eyebrow">Compte rendu sales</span>
-          <h2>{result.analysis.company_name || 'Prospect analysé'}</h2>
-          <p>{result.analysis.summary}</p>
-        </div>
+    <section className="result-card" id="result">
+      <div className="result-head">
+        <span className="eyebrow">Brief sales</span>
+        <h2>{result.analysis.company_name || 'Prospect'}</h2>
+        <p className="result-summary">{result.analysis.summary}</p>
       </div>
-      <div className="summary-grid sales-summary">
-        <div><span>Site analysé</span><strong>{result.analysis.url || result.extracted?.finalUrl}</strong></div>
-        <div><span>Lecture rapide</span><strong>Signaux commerciaux prêts à utiliser</strong></div>
-        <div><span>Prochaine étape</span><strong>Prioriser, qualifier, contacter</strong></div>
+      <div className="result-meta">
+        <span>Site : {result.analysis.url || result.extracted?.finalUrl}</span>
       </div>
-      <div className="answer-grid">
-        {fields.map(([key, item]) => (
-          <article className="answer-card" key={key}>
-            <div className="answer-top"><span>{item.title || key}</span><em>{Math.round((item.confidence || 0) * 100)}% sûr</em></div>
-            {typeof item.answer === 'boolean' ? (
-              <strong className={item.answer ? 'yes' : 'no'}>{formatAnswer(item.answer)}</strong>
-            ) : (
-              <span className="answer-text">{formatAnswer(item.answer)}</span>
-            )}
-            <p>{item.reasoning}</p>
-            <ul>{(item.evidence || []).map((evidence, i) => <li key={i}>{evidence}</li>)}</ul>
-          </article>
-        ))}
-      </div>
+      <table className="signal-table">
+        <thead><tr><th>Signal</th><th>Réponse</th><th>Confiance</th></tr></thead>
+        <tbody>
+          {fields.map(([key, item]) => (
+            <tr key={key}>
+              <td className="sig-label">{item.title || key}</td>
+              <td className={`sig-answer ${typeof item.answer === 'boolean' ? (item.answer ? 'yes' : 'no') : ''}`}>
+                {formatAnswer(item.answer)}
+              </td>
+              <td className="sig-conf">
+                <span className="conf-bar"><span className="conf-fill" style={{width: `${Math.round((item.confidence || 0)*100)}%`}} /></span>
+                {Math.round((item.confidence || 0)*100)}%
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 }
