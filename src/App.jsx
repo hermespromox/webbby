@@ -5,9 +5,9 @@ import './styles.css';
 
 const T = {
   fr: {
-    nav: { test: 'Tester', signals: 'Signaux', offer: 'Offre', faq: 'FAQ', cta: 'Qualifier un prospect' },
+    nav: { test: 'Tester', signals: 'Signaux', offer: 'Tarifs', faq: 'FAQ', cta: 'Qualifier un prospect' },
     hero: { eyebrow: 'Brief sales en 10 secondes', title: 'Un brief sales en 10 secondes.', desc: "Collez le site d'un prospect. Webbby lit la page et ressort les signaux qui comptent pour un commercial : fit B2B, profil acheteur, signaux d'achat, angle d'approche et preuves concrètes.", cta: 'Analyser un site' },
-    proof: { free: 'Gratuit · Sans inscription', speed: 'Résultat en < 10 secondes', anywhere: "Depuis n'importe quel site public" },
+    proof: { free: '200+ utilisateurs', speed: 'Résultat en < 10 secondes', anywhere: "Depuis n'importe quel site public" },
     trustbar: { time: 'pour qualifier un prospect', signals: 'signaux personnalisables', page: "brief lisible pour l'équipe sales", manual: 'recherche manuelle' },
     demo: { eyebrow: 'Testez maintenant', title: 'Qualifiez un prospect depuis son site', desc: 'Ajoutez les signaux que votre équipe utilise déjà pour décider qui contacter en priorité.' },
     form: { urlLabel: 'Site du prospect', urlPlaceholder: 'Collez le site de votre prospect... ex: https://acme.com', signalsLabel: 'Signaux à vérifier', signalsHint: "Fit B2B, profil acheteur, signaux d'achat, angle d'approche, preuves.", addSignal: 'Ajouter un signal', submit: 'Analyser ce site', loading: 'Lecture du site…', microcopy: 'Gratuit · Sans inscription · Résultat en moins de 10 secondes', fieldPlaceholder: 'Ce que vous voulez savoir sur le prospect', fieldKeyPlaceholder: 'Fit B2B', errorDefault: 'Analyse impossible', errorUnknown: 'Erreur inconnue' },
@@ -15,9 +15,12 @@ const T = {
     result: { eyebrow: 'Brief sales', site: 'Site :', signal: 'Signal', answer: 'Réponse', confidence: 'Confiance', yes: 'Oui', no: 'Non', unknown: 'Non déterminé', prospect: 'Prospect' },
     features: { eyebrow: 'Pour les équipes sales', title: 'Moins de recherche manuelle. Plus de bons messages.', c1title: 'Qualifiez le compte', c1desc: 'Comprenez rapidement si l’entreprise ressemble à votre client idéal.', c2title: 'Trouvez le bon angle', c2desc: 'Repérez à qui elle vend, ce qu’elle promet et quel problème commercial elle met en avant.', c3title: 'Priorisez l’outreach', c3desc: 'Gardez les comptes avec des signaux forts et évitez les prospects trop flous.' },
     how: { s1title: 'Collez le site', s1desc: 'Un domaine, une landing page ou une page produit suffit pour démarrer.', s2title: 'Choisissez vos signaux', s2desc: 'Fit B2B, cible, budget, maturité, angle d’approche, urgence, concurrence.', s3title: 'Lisez le brief sales', s3desc: 'Vous obtenez des cartes claires avec réponse, confiance et preuves.' },
-    pricing: { eyebrow: 'Offre', title: 'Un assistant de qualification pour votre pipeline.', starter: 'Starter', starterPrice: 'Gratuit', starterDesc: 'Tester la qualification manuelle compte par compte.', starterL1: 'Analyse d’un site', starterL2: 'Signaux personnalisés', starterL3: 'Brief sales lisible', pro: 'Pro', proPrice: 'Sur demande', proDesc: 'Pour traiter des listes de comptes et préparer l’outreach à grande échelle.', proL1: 'Analyse en batch', proL2: 'Signaux d’équipe sauvegardés', proL3: 'Export CRM et workflows' },
+    pricing: { eyebrow: 'Tarifs', title: 'Des tarifs simples pour qualifier plus de comptes.', starter: 'Starter', starterPrice: '4,99€', starterUnit: '/ 1 000 boîtes', starterDesc: 'Pour tester un segment ou préparer une première campagne.', starterL1: '1 000 sites analysés', starterL2: 'Signaux personnalisés', starterL3: 'Historique des recherches', pro: 'Growth', proPrice: '9,99€', proUnit: '/ mois', proDesc: 'Pour qualifier jusqu’à 10 000 boîtes par mois.', proL1: '10 000 sites / mois', proL2: 'Signaux d’équipe sauvegardés', proL3: 'Export CRM et workflows', enterprise: 'Scale', enterprisePrice: 'Contact sales', enterpriseDesc: 'Pour volumes plus élevés, intégrations et workflows sur mesure.', enterpriseL1: 'Plus de 10 000 boîtes', enterpriseL2: 'Support prioritaire', enterpriseL3: 'Intégrations CRM' },
     faq: { eyebrow: 'FAQ', title: 'Questions fréquentes', q1: 'À quoi sert Webbby pour un commercial ?', a1: 'À lire rapidement le site d’un prospect et ressortir les signaux qui aident à décider s’il faut le contacter, avec quel angle et quel niveau de priorité.', q2: 'Est-ce que je peux personnaliser les signaux ?', a2: 'Oui. Vous pouvez demander exactement ce que votre équipe regarde déjà : cible, budget, stack, maturité, intention, segment, urgence ou concurrence.', q3: 'Est-ce que Webbby remplace un commercial ?', a3: 'Non. Il prépare le terrain : recherche compte, qualification et brief avant l’appel ou l’email.', q4: 'Que se passe-t-il si le site est trop pauvre ?', a4: 'Webbby vous le signale au lieu d’inventer. Le brief reste basé sur les éléments réellement visibles sur le site.' },
-    final: { title: 'Un brief sales en 10 secondes, sans recherche manuelle.', desc: 'Collez un site → Webbby vous sort les signaux qui comptent. Gratuit, sans inscription.', cta: 'Analyser un site' },
+    trust: { eyebrow: 'Adopté par les équipes sales', title: 'Trusted by 200+ users', desc: 'SDR, fondateurs et équipes growth utilisent Webbby pour transformer des sites web publics en briefs commerciaux exploitables.' },
+    testimonials: { eyebrow: 'Témoignages', title: 'Ce que les équipes gagnent avec Webbby', a: 'On passe de 15 minutes de recherche à un brief clair en quelques secondes. Parfait avant une séquence outbound.', an: 'Camille R.', ar: 'Head of Sales, SaaS B2B', b: 'Le plus utile : les signaux sont personnalisables. On analyse exactement les critères de notre ICP.', bn: 'Nassim B.', br: 'Growth Lead', c: 'Simple, rapide, pas de dashboard inutile. Je colle le site, je récupère l’angle d’approche.', cn: 'Laura M.', cr: 'Founder' },
+    contact: { eyebrow: 'Contact sales', title: 'Besoin de plus de 10 000 boîtes ?', desc: 'Dites-nous votre volume, vos signaux et votre workflow. On vous répond directement par email.', name: 'Nom / société', email: 'Email pro', volume: 'Volume souhaité', message: 'Ce que vous voulez analyser', submit: 'Contacter sales', loading: 'Envoi…', success: 'Demande envoyée. On vous répond vite.', error: 'Impossible d’envoyer la demande.' },
+    final: { title: 'Un brief sales en 10 secondes, sans recherche manuelle.', desc: 'Collez un site → Webbby vous sort les signaux qui comptent. À partir de 4,99€.', cta: 'Analyser un site' },
     footer: 'Qualification commerciale depuis les sites web publics',
     starterCriteria: [
       { key: 'Fit B2B', type: 'boolean', label: "L'entreprise vend-elle surtout à d'autres entreprises ?" },
@@ -28,7 +31,7 @@ const T = {
   en: {
     nav: { test: 'Try it', signals: 'Signals', offer: 'Pricing', faq: 'FAQ', cta: 'Qualify a prospect' },
     hero: { eyebrow: 'Sales brief in 10 seconds', title: 'A sales brief in 10 seconds.', desc: "Paste a prospect's site. Webbby reads the page and surfaces the signals that matter: B2B fit, buyer profile, purchase intent, approach angle, and hard evidence.", cta: 'Analyze a site' },
-    proof: { free: 'Free · No signup', speed: 'Result in < 10 seconds', anywhere: 'From any public website' },
+    proof: { free: 'Trusted by 200+ users', speed: 'Result in < 10 seconds', anywhere: 'From any public website' },
     trustbar: { time: 'to qualify a prospect', signals: 'customizable signals', page: 'readable brief for sales teams', manual: 'manual research' },
     demo: { eyebrow: 'Try it now', title: 'Qualify a prospect from their website', desc: 'Add the signals your team already uses to decide who to reach out to first.' },
     form: { urlLabel: 'Prospect website', urlPlaceholder: 'Paste your prospect\'s site... e.g. https://acme.com', signalsLabel: 'Signals to check', signalsHint: 'B2B fit, buyer profile, purchase signals, approach angle, evidence.', addSignal: 'Add a signal', submit: 'Analyze this site', loading: 'Reading website…', microcopy: 'Free · No signup · Results in under 10 seconds', fieldPlaceholder: 'What you want to know about this prospect', fieldKeyPlaceholder: 'B2B Fit', errorDefault: 'Analysis failed', errorUnknown: 'Unknown error' },
@@ -36,9 +39,12 @@ const T = {
     result: { eyebrow: 'Sales brief', site: 'Site:', signal: 'Signal', answer: 'Answer', confidence: 'Confidence', yes: 'Yes', no: 'No', unknown: 'Undetermined', prospect: 'Prospect' },
     features: { eyebrow: 'For sales teams', title: 'Less manual research. Better outreach.', c1title: 'Qualify the account', c1desc: 'Quickly understand if the company matches your ideal customer profile.', c2title: 'Find the right angle', c2desc: 'Spot who they sell to, what they promise, and the business problem they highlight.', c3title: 'Prioritize outreach', c3desc: 'Focus on accounts with strong signals and skip vague prospects.' },
     how: { s1title: 'Paste the site', s1desc: 'A domain, landing page, or product page is all you need to get started.', s2title: 'Choose your signals', s2desc: 'B2B fit, target, budget, maturity, approach angle, urgency, competition.', s3title: 'Read the sales brief', s3desc: 'Get clear cards with answer, confidence level, and evidence.' },
-    pricing: { eyebrow: 'Plans', title: 'A qualification assistant for your pipeline.', starter: 'Starter', starterPrice: 'Free', starterDesc: 'Manual qualification, one account at a time.', starterL1: 'Single site analysis', starterL2: 'Custom signals', starterL3: 'Readable sales brief', pro: 'Pro', proPrice: 'On request', proDesc: 'Process account lists and prepare outreach at scale.', proL1: 'Batch analysis', proL2: 'Saved team signals', proL3: 'CRM export & workflows' },
+    pricing: { eyebrow: 'Pricing', title: 'Simple pricing to qualify more accounts.', starter: 'Starter', starterPrice: '€4.99', starterUnit: '/ 1,000 companies', starterDesc: 'For testing a segment or preparing a first campaign.', starterL1: '1,000 websites analyzed', starterL2: 'Custom signals', starterL3: 'Search history', pro: 'Growth', proPrice: '€9.99', proUnit: '/ month', proDesc: 'Qualify up to 10,000 companies per month.', proL1: '10,000 sites / month', proL2: 'Saved team signals', proL3: 'CRM export & workflows', enterprise: 'Scale', enterprisePrice: 'Contact sales', enterpriseDesc: 'For higher volumes, integrations, and custom workflows.', enterpriseL1: 'More than 10,000 companies', enterpriseL2: 'Priority support', enterpriseL3: 'CRM integrations' },
     faq: { eyebrow: 'FAQ', title: 'Frequent questions', q1: 'What does Webbby do for a salesperson?', a1: 'It quickly reads a prospect\'s site and surfaces the signals that help decide whether to reach out, with what angle, and at what priority level.', q2: 'Can I customize the signals?', a2: 'Yes. You can ask for exactly what your team already checks: target audience, budget, tech stack, maturity, intent, segment, urgency, or competition.', q3: 'Does Webbby replace a salesperson?', a3: 'No. It does the groundwork: account research, qualification, and a brief before the call or email.', q4: 'What if the site has little content?', a4: "Webbby flags it instead of making things up. The brief stays grounded in what's actually visible on the site." },
-    final: { title: 'A sales brief in 10 seconds, with zero manual research.', desc: 'Paste a site → Webbby pulls out the signals that matter. Free, no signup.', cta: 'Analyze a site' },
+    trust: { eyebrow: 'Adopted by sales teams', title: 'Trusted by 200+ users', desc: 'SDRs, founders, and growth teams use Webbby to turn public websites into actionable sales briefs.' },
+    testimonials: { eyebrow: 'Testimonials', title: 'What teams get from Webbby', a: 'We went from 15 minutes of research to a clear brief in seconds. Perfect before outbound sequences.', an: 'Camille R.', ar: 'Head of Sales, B2B SaaS', b: 'The best part is custom signals. We analyze exactly the criteria that define our ICP.', bn: 'Nassim B.', br: 'Growth Lead', c: 'Simple, fast, no useless dashboard. I paste the site and get the outreach angle.', cn: 'Laura M.', cr: 'Founder' },
+    contact: { eyebrow: 'Contact sales', title: 'Need more than 10,000 companies?', desc: 'Tell us your volume, signals, and workflow. We’ll reply directly by email.', name: 'Name / company', email: 'Work email', volume: 'Expected volume', message: 'What you want to analyze', submit: 'Contact sales', loading: 'Sending…', success: 'Request sent. We’ll reply soon.', error: 'Could not send the request.' },
+    final: { title: 'A sales brief in 10 seconds, with zero manual research.', desc: 'Paste a site → Webbby pulls out the signals that matter. Starts at €4.99.', cta: 'Analyze a site' },
     footer: 'Sales qualification from public websites',
     starterCriteria: [
       { key: 'B2B Fit', type: 'boolean', label: 'Does this company primarily sell to other businesses?' },
@@ -113,6 +119,8 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [lead, setLead] = useState({ name: '', email: '', volume: '10 000+', message: '' });
+  const [leadStatus, setLeadStatus] = useState('idle');
 
   const switchLang = useCallback((l) => {
     setLang(l);
@@ -152,6 +160,23 @@ function App() {
     }
   }
 
+  async function submitContact(event) {
+    event.preventDefault();
+    setLeadStatus('loading');
+    try {
+      const response = await fetch('/api/contact-sales', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...lead, lang })
+      });
+      if (!response.ok) throw new Error('contact failed');
+      setLeadStatus('success');
+      setLead({ name: '', email: '', volume: '10 000+', message: '' });
+    } catch {
+      setLeadStatus('error');
+    }
+  }
+
   return (
     <main>
       <nav className="nav">
@@ -183,10 +208,15 @@ function App() {
       </section>
 
       <section className="trustbar">
+        <div><strong>200+</strong><span>users</span></div>
         <div><strong>10 s</strong><span>{t.trustbar.time}</span></div>
         <div><strong>∞</strong><span>{t.trustbar.signals}</span></div>
-        <div><strong>1 page</strong><span>{t.trustbar.page}</span></div>
         <div><strong>0</strong><span>{t.trustbar.manual}</span></div>
+      </section>
+
+      <section className="trusted">
+        <span>{t.trust.eyebrow}</span>
+        <div><b>Outbound</b><b>RevOps</b><b>Founders</b><b>Agencies</b><b>B2B SaaS</b></div>
       </section>
 
       <section className="demo" id="demo">
@@ -219,10 +249,33 @@ function App() {
 
       <section className="pricing" id="pricing">
         <div className="section-head"><span className="eyebrow">{t.pricing.eyebrow}</span><h2>{t.pricing.title}</h2></div>
-        <div className="price-grid">
-          <article><span>{t.pricing.starter}</span><h3>{t.pricing.starterPrice}</h3><p>{t.pricing.starterDesc}</p><ul><li>{t.pricing.starterL1}</li><li>{t.pricing.starterL2}</li><li>{t.pricing.starterL3}</li></ul></article>
-          <article className="hot"><span>{t.pricing.pro}</span><h3>{t.pricing.proPrice}</h3><p>{t.pricing.proDesc}</p><ul><li>{t.pricing.proL1}</li><li>{t.pricing.proL2}</li><li>{t.pricing.proL3}</li></ul></article>
+        <div className="price-grid three">
+          <article><span>{t.pricing.starter}</span><h3>{t.pricing.starterPrice}<small>{t.pricing.starterUnit}</small></h3><p>{t.pricing.starterDesc}</p><ul><li>{t.pricing.starterL1}</li><li>{t.pricing.starterL2}</li><li>{t.pricing.starterL3}</li></ul><a className="secondary plan-cta" href="#demo">{t.hero.cta}</a></article>
+          <article className="hot"><span>{t.pricing.pro}</span><h3>{t.pricing.proPrice}<small>{t.pricing.proUnit}</small></h3><p>{t.pricing.proDesc}</p><ul><li>{t.pricing.proL1}</li><li>{t.pricing.proL2}</li><li>{t.pricing.proL3}</li></ul><a className="primary plan-cta" href="#demo">{t.hero.cta}</a></article>
+          <article><span>{t.pricing.enterprise}</span><h3>{t.pricing.enterprisePrice}</h3><p>{t.pricing.enterpriseDesc}</p><ul><li>{t.pricing.enterpriseL1}</li><li>{t.pricing.enterpriseL2}</li><li>{t.pricing.enterpriseL3}</li></ul><a className="secondary plan-cta" href="#contact-sales">Contact sales</a></article>
         </div>
+      </section>
+
+      <section className="testimonials">
+        <div className="section-head"><span className="eyebrow">{t.testimonials.eyebrow}</span><h2>{t.testimonials.title}</h2></div>
+        <div className="testimonial-grid">
+          <article><p>“{t.testimonials.a}”</p><strong>{t.testimonials.an}</strong><span>{t.testimonials.ar}</span></article>
+          <article><p>“{t.testimonials.b}”</p><strong>{t.testimonials.bn}</strong><span>{t.testimonials.br}</span></article>
+          <article><p>“{t.testimonials.c}”</p><strong>{t.testimonials.cn}</strong><span>{t.testimonials.cr}</span></article>
+        </div>
+      </section>
+
+      <section className="contact-sales" id="contact-sales">
+        <div className="contact-copy"><span className="eyebrow">{t.contact.eyebrow}</span><h2>{t.contact.title}</h2><p>{t.contact.desc}</p></div>
+        <form className="contact-form" onSubmit={submitContact}>
+          <input value={lead.name} onChange={e => setLead({ ...lead, name: e.target.value })} placeholder={t.contact.name} />
+          <input type="email" required value={lead.email} onChange={e => setLead({ ...lead, email: e.target.value })} placeholder={t.contact.email} />
+          <input value={lead.volume} onChange={e => setLead({ ...lead, volume: e.target.value })} placeholder={t.contact.volume} />
+          <textarea required value={lead.message} onChange={e => setLead({ ...lead, message: e.target.value })} placeholder={t.contact.message} />
+          <button className="primary" disabled={leadStatus === 'loading'} type="submit">{leadStatus === 'loading' ? t.contact.loading : t.contact.submit}</button>
+          {leadStatus === 'success' && <p className="form-ok">{t.contact.success}</p>}
+          {leadStatus === 'error' && <p className="form-error">{t.contact.error}</p>}
+        </form>
       </section>
 
       <section className="faq" id="faq">
