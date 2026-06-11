@@ -5,7 +5,7 @@ import './styles.css';
 
 const T = {
   fr: {
-    nav: { test: 'Tester', signals: 'Signaux', offer: 'Tarifs', faq: 'FAQ', contact: 'Nous contacter', cta: 'Qualifier un prospect' },
+    nav: { test: 'Tester', useCases: 'Cas d’usage', integrations: 'Intégrations', offer: 'Tarifs', faq: 'FAQ', contact: 'Nous contacter', cta: 'Qualifier un prospect' },
     hero: { eyebrow: 'Webbby AI · Brief sales en 10 secondes', title: 'Webbby AI transforme un site en brief sales.', desc: "À partir du site d'un prospect, Webbby AI ressort les signaux qui comptent pour un commercial : fit B2B, profil acheteur, signaux d'achat, angle d'approche et priorités.", cta: 'Analyser un site' },
     proof: { free: '200+ utilisateurs', speed: 'Résultat en < 10 secondes', anywhere: "Depuis n'importe quel site public" },
     trustbar: { users: 'utilisateurs', time: 'pour qualifier un prospect', signals: 'signaux personnalisables', page: "brief lisible pour l'équipe sales", manual: 'recherche manuelle' },
@@ -14,6 +14,8 @@ const T = {
     types: { boolean: 'Oui / Non', string: 'Réponse courte', number: 'Score ou nombre' },
     result: { eyebrow: 'Brief sales Webbby AI', site: 'Site :', signal: '', answer: 'Insights', confidence: 'Confiance', yes: 'Oui', no: 'Non', unknown: 'Non déterminé', prospect: 'Prospect' },
     features: { eyebrow: 'Webbby AI pour les équipes sales', title: 'Moins de recherche manuelle. Plus de bons messages.', c1title: 'Qualifiez le compte', c1desc: 'Comprenez rapidement si l’entreprise ressemble à votre client idéal.', c2title: 'Trouvez le bon angle', c2desc: 'Repérez à qui elle vend, ce qu’elle promet et quel problème commercial elle met en avant.', c3title: 'Priorisez l’outreach', c3desc: 'Gardez les comptes avec des signaux forts et évitez les prospects trop flous.' },
+    useCases: { eyebrow: 'Cas d’usage', title: 'Là où Webbby AI fait gagner du temps.', desc: 'Des briefs actionnables pour chaque moment où une équipe sales doit comprendre un compte vite.', aTitle: 'Préparer une campagne outbound', aDesc: 'Qualifiez 1 000 boîtes, repérez les bons comptes et adaptez les angles avant d’envoyer.', bTitle: 'Enrichir un CRM', bDesc: 'Ajoutez des insights lisibles aux comptes : cible, fit B2B, clients, international, priorités.', cTitle: 'Prioriser une liste de prospects', cDesc: 'Classez les comptes selon vos signaux réels, pas selon une note opaque.', dTitle: 'Préparer un call ou un email', dDesc: 'Obtenez en quelques secondes le contexte, les preuves et l’angle commercial à utiliser.' },
+    integrations: { eyebrow: 'Intégrations', title: 'Pensé pour vos workflows sales.', desc: 'Webbby AI peut alimenter vos outils existants avec les mêmes signaux : CRM, tableurs, exports et automatisations.', a: 'HubSpot', b: 'Salesforce', c: 'Pipedrive', d: 'Google Sheets', e: 'Airtable', f: 'CSV export', g: 'Make', h: 'Zapier', note: 'Besoin d’une intégration précise ? Contact sales et on la branche sur votre workflow.' },
     how: { s1title: 'À partir du site', s1desc: 'Un domaine, une landing page ou une page produit suffit pour démarrer.', s2title: 'Choisissez vos signaux', s2desc: 'Fit B2B, cible, budget, maturité, angle d’approche, urgence, concurrence.', s3title: 'Lisez le brief sales', s3desc: 'Vous obtenez un tableau clair avec réponse, confiance et priorités commerciales.' },
     pricing: { eyebrow: 'Tarifs', title: 'Des tarifs simples pour qualifier plus de comptes.', starter: 'Starter', starterPrice: '4,99€', starterUnit: '/ 1 000 boîtes', starterDesc: 'Pour tester un segment ou préparer une première campagne.', starterL1: '1 000 sites analysés', starterL2: 'Signaux personnalisés', starterL3: 'Historique des recherches', pro: 'Growth', proPrice: '9,99€', proUnit: '/ mois', proDesc: 'Pour qualifier jusqu’à 10 000 boîtes par mois.', proL1: '10 000 sites / mois', proL2: 'Signaux d’équipe sauvegardés', proL3: 'Export CRM et workflows', enterprise: 'Scale', enterprisePrice: 'Contact sales', enterpriseDesc: 'Pour volumes plus élevés, intégrations et workflows sur mesure.', enterpriseL1: 'Plus de 10 000 boîtes', enterpriseL2: 'Support prioritaire', enterpriseL3: 'Intégrations CRM' },
     faq: { eyebrow: 'FAQ', title: 'Questions fréquentes', q1: 'À quoi sert Webbby AI pour un commercial ?', a1: 'À lire rapidement le site d’un prospect et ressortir les signaux qui aident à décider s’il faut le contacter, avec quel angle et quel niveau de priorité.', q2: 'Est-ce que je peux personnaliser les signaux ?', a2: 'Oui. Vous pouvez demander exactement ce que votre équipe regarde déjà : cible, budget, stack, maturité, intention, segment, urgence ou concurrence.', q3: 'Est-ce que Webbby remplace un commercial ?', a3: 'Non. Il prépare le terrain : recherche compte, qualification et brief avant l’appel ou l’email.', q4: 'Que se passe-t-il si le site est trop pauvre ?', a4: 'Webbby vous le signale au lieu d’inventer. Le brief reste basé sur les éléments réellement visibles sur le site.' },
@@ -30,7 +32,7 @@ const T = {
     ]
   },
   en: {
-    nav: { test: 'Try it', signals: 'Signals', offer: 'Pricing', faq: 'FAQ', contact: 'Contact us', cta: 'Qualify a prospect' },
+    nav: { test: 'Try it', useCases: 'Use cases', integrations: 'Integrations', offer: 'Pricing', faq: 'FAQ', contact: 'Contact us', cta: 'Qualify a prospect' },
     hero: { eyebrow: 'Webbby AI · Sales brief in 10 seconds', title: 'Webbby AI turns a website into a sales brief.', desc: "From a prospect's website, Webbby AI surfaces the signals that matter: B2B fit, buyer profile, purchase intent, approach angle, and sales priorities.", cta: 'Analyze a site' },
     proof: { free: 'Trusted by 200+ users', speed: 'Result in < 10 seconds', anywhere: 'From any public website' },
     trustbar: { users: 'users', time: 'to qualify a prospect', signals: 'customizable signals', page: 'readable brief for sales teams', manual: 'manual research' },
@@ -39,6 +41,8 @@ const T = {
     types: { boolean: 'Yes / No', string: 'Short answer', number: 'Score or number' },
     result: { eyebrow: 'Webbby AI sales brief', site: 'Site:', signal: '', answer: 'Insights', confidence: 'Confidence', yes: 'Yes', no: 'No', unknown: 'Undetermined', prospect: 'Prospect' },
     features: { eyebrow: 'Webbby AI for sales teams', title: 'Less manual research. Better outreach.', c1title: 'Qualify the account', c1desc: 'Quickly understand if the company matches your ideal customer profile.', c2title: 'Find the right angle', c2desc: 'Spot who they sell to, what they promise, and the business problem they highlight.', c3title: 'Prioritize outreach', c3desc: 'Focus on accounts with strong signals and skip vague prospects.' },
+    useCases: { eyebrow: 'Use cases', title: 'Where Webbby AI saves real sales time.', desc: 'Actionable briefs for every moment where a sales team needs to understand an account fast.', aTitle: 'Prepare an outbound campaign', aDesc: 'Qualify 1,000 companies, spot the right accounts, and adapt angles before sending.', bTitle: 'Enrich a CRM', bDesc: 'Add readable insights to accounts: target, B2B fit, customers, international presence, priorities.', cTitle: 'Prioritize a prospect list', cDesc: 'Rank accounts based on your real signals, not a black-box score.', dTitle: 'Prepare a call or email', dDesc: 'Get the context, proof points, and sales angle to use in seconds.' },
+    integrations: { eyebrow: 'Integrations', title: 'Built for your sales workflows.', desc: 'Webbby AI can feed your existing tools with the same signals: CRM, spreadsheets, exports, and automations.', a: 'HubSpot', b: 'Salesforce', c: 'Pipedrive', d: 'Google Sheets', e: 'Airtable', f: 'CSV export', g: 'Make', h: 'Zapier', note: 'Need a specific integration? Contact sales and we’ll plug it into your workflow.' },
     how: { s1title: 'Start from the site', s1desc: 'A domain, landing page, or product page is all you need to get started.', s2title: 'Choose your signals', s2desc: 'B2B fit, target, budget, maturity, approach angle, urgency, competition.', s3title: 'Read the sales brief', s3desc: 'Get a clear table with answers, confidence, and sales priorities.' },
     pricing: { eyebrow: 'Pricing', title: 'Simple pricing to qualify more accounts.', starter: 'Starter', starterPrice: '€4.99', starterUnit: '/ 1,000 companies', starterDesc: 'For testing a segment or preparing a first campaign.', starterL1: '1,000 websites analyzed', starterL2: 'Custom signals', starterL3: 'Search history', pro: 'Growth', proPrice: '€9.99', proUnit: '/ month', proDesc: 'Qualify up to 10,000 companies per month.', proL1: '10,000 sites / month', proL2: 'Saved team signals', proL3: 'CRM export & workflows', enterprise: 'Scale', enterprisePrice: 'Contact sales', enterpriseDesc: 'For higher volumes, integrations, and custom workflows.', enterpriseL1: 'More than 10,000 companies', enterpriseL2: 'Priority support', enterpriseL3: 'CRM integrations' },
     faq: { eyebrow: 'FAQ', title: 'Frequent questions', q1: 'What does Webbby AI do for a salesperson?', a1: 'It quickly reads a prospect\'s site and surfaces the signals that help decide whether to reach out, with what angle, and at what priority level.', q2: 'Can I customize the signals?', a2: 'Yes. You can ask for exactly what your team already checks: target audience, budget, tech stack, maturity, intent, segment, urgency, or competition.', q3: 'Does Webbby replace a salesperson?', a3: 'No. It does the groundwork: account research, qualification, and a brief before the call or email.', q4: 'What if the site has little content?', a4: "Webbby flags it instead of making things up. The brief stays grounded in what's actually visible on the site." },
@@ -192,7 +196,7 @@ function App() {
     <main>
       <nav className="nav">
         <a className="brand" href="#top" aria-label="Webbby home"><span className="logo"><SearchCheck size={22} /></span><span>Webbby</span></a>
-        <div className="nav-links"><a href="#demo">{t.nav.test}</a><a href="#features">{t.nav.signals}</a><a href="#pricing">{t.nav.offer}</a><a href="#faq">{t.nav.faq}</a></div>
+        <div className="nav-links"><a href="#demo">{t.nav.test}</a><a href="#use-cases">{t.nav.useCases}</a><a href="#integrations">{t.nav.integrations}</a><a href="#pricing">{t.nav.offer}</a><a href="#faq">{t.nav.faq}</a></div>
         <div className="nav-right">
           <a className="contact-link" href="#contact-sales">{t.nav.contact}</a>
           <div className="lang-toggle">
@@ -257,6 +261,24 @@ function App() {
         <div><span>01</span><h3>{t.how.s1title}</h3><p>{t.how.s1desc}</p></div>
         <div><span>02</span><h3>{t.how.s2title}</h3><p>{t.how.s2desc}</p></div>
         <div><span>03</span><h3>{t.how.s3title}</h3><p>{t.how.s3desc}</p></div>
+      </section>
+
+      <section className="use-cases" id="use-cases">
+        <div className="section-head"><span className="eyebrow">{t.useCases.eyebrow}</span><h2>{t.useCases.title}</h2><p>{t.useCases.desc}</p></div>
+        <div className="use-case-grid">
+          <article><span>01</span><h3>{t.useCases.aTitle}</h3><p>{t.useCases.aDesc}</p></article>
+          <article><span>02</span><h3>{t.useCases.bTitle}</h3><p>{t.useCases.bDesc}</p></article>
+          <article><span>03</span><h3>{t.useCases.cTitle}</h3><p>{t.useCases.cDesc}</p></article>
+          <article><span>04</span><h3>{t.useCases.dTitle}</h3><p>{t.useCases.dDesc}</p></article>
+        </div>
+      </section>
+
+      <section className="integrations" id="integrations">
+        <div className="integration-copy"><span className="eyebrow">{t.integrations.eyebrow}</span><h2>{t.integrations.title}</h2><p>{t.integrations.desc}</p><a className="secondary plan-cta" href="#contact-sales">{t.nav.contact}</a></div>
+        <div className="integration-grid">
+          {[t.integrations.a,t.integrations.b,t.integrations.c,t.integrations.d,t.integrations.e,t.integrations.f,t.integrations.g,t.integrations.h].map(name => <b key={name}>{name}</b>)}
+        </div>
+        <p className="integration-note">{t.integrations.note}</p>
       </section>
 
       <section className="pricing" id="pricing">
