@@ -65,6 +65,19 @@ function parseBody(req) {
   });
 }
 
+function detectQuestionLanguage(criteria) {
+  const text = criteria.map(c => `${c.key || ''} ${c.label || ''}`).join(' ').toLowerCase();
+  const frenchHits = (text.match(/\b(entreprise|client|cible|est[- ]ce|quel|quelle|qui|budget|offres|achat|prospect|montre|signaux|réponse|oui|non|site|vente|commercial|français)\b/g) || []).length;
+  const englishHits = (text.match(/\b(company|customer|target|does|is|are|who|what|which|budget|offer|buying|purchase|prospect|signals|answer|yes|no|website|sales|english)\b/g) || []).length;
+  if (englishHits > frenchHits) return 'English';
+  if (frenchHits > englishHits) return 'French';
+  return /[éèêëàâîïôùûçœ]/i.test(text) ? 'French' : 'English';
+}
+
+function languageCode(language) {
+  return language === 'French' ? 'fr' : 'en';
+}
+
 function schemaFor(criteria) {
   const properties = {};
   const required = [];
@@ -91,6 +104,7 @@ function schemaFor(criteria) {
     properties: {
       url: { type: 'string' },
       company_name: { type: 'string' },
+      response_language: { type: 'string', enum: ['en', 'fr'] },
       summary: { type: 'string' },
       fields: {
         type: 'object',
@@ -99,7 +113,7 @@ function schemaFor(criteria) {
         required
       }
     },
-    required: ['url', 'company_name', 'summary', 'fields']
+    required: ['url', 'company_name', 'response_language', 'summary', 'fields']
   };
 }
 
@@ -157,9 +171,11 @@ export default async function handler(req, res) {
       return json(res, 422, { ok: false, error: 'Could not extract enough text from this website', status: site.status });
     }
 
+    const responseLanguage = detectQuestionLanguage(criteria);
+    const responseLanguageCode = languageCode(responseLanguage);
     const schema = schemaFor(criteria);
     const criteriaText = criteria.map(c => `- ${c.key} (${c.type}): ${c.label}`).join('\n');
-    const prompt = `Tu aides une équipe commerciale à qualifier un prospect à partir de son site web. Analyse uniquement les informations fournies, sans inventer. Pour chaque signal, donne un titre lisible côté sales, une réponse courte, un niveau de confiance, une raison concise et des preuves sous forme de liste de phrases courtes.\n\nSite demandé: ${url.toString()}\nSite final: ${site.finalUrl}\nMeta: ${JSON.stringify(site.meta)}\n\nSignaux à vérifier:\n${criteriaText}\n\nTexte du site:\n${site.text}`;
+    const prompt = `You help a sales team qualify a prospect from its website. Analyze only the supplied information; do not invent. The user's criteria/questions are in ${responseLanguage}. Return ALL human-readable fields in ${responseLanguage}: company_name when possible, summary, every field title, answer when it is a string, reasoning, and evidence. Set response_language exactly to ${responseLanguageCode}. Boolean answers must remain JSON booleans. For every signal, provide a sales-readable title, a short answer, confidence, concise reasoning, and concrete evidence as short phrases.\n\nRequested site: ${url.toString()}\nFinal site: ${site.finalUrl}\nMeta: ${JSON.stringify(site.meta)}\n\nCriteria/questions to check:\n${criteriaText}\n\nWebsite text:\n${site.text}`;
 
     const openrouterResponse = await fetch(OPENROUTER_URL, {
       method: 'POST',
@@ -174,7 +190,7 @@ export default async function handler(req, res) {
         reasoning: { effort: 'xhigh' },
         temperature: 0.1,
         messages: [
-          { role: 'system', content: 'Tu es Webbby, un analyste de prospection B2B. Tu dois aider des équipes sales à décider si un compte mérite un message. Réponses courtes, preuves concrètes, aucun élément inventé. Les preuves doivent toujours être une liste de chaînes de texte.' },
+          { role: 'system', content: 'You are Webbby, a B2B prospecting analyst. Help sales teams decide whether an account deserves outreach. Always answer in the same language as the user criteria/questions. Keep answers short, use concrete evidence, invent nothing. Evidence must always be an array of strings.' },
           { role: 'user', content: prompt }
         ],
         response_format: {

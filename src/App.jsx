@@ -75,10 +75,10 @@ function FieldRow({ field, index, update, remove, t, types }) {
   );
 }
 
-function formatAnswer(value, t) {
-  if (typeof value === 'boolean') return value ? t.yes : t.no;
-  if (typeof value === 'number') return value.toLocaleString('fr-FR');
-  return value || t.unknown;
+function formatAnswer(value, resultT, language = 'fr') {
+  if (typeof value === 'boolean') return value ? resultT.yes : resultT.no;
+  if (typeof value === 'number') return value.toLocaleString(language === 'en' ? 'en-US' : 'fr-FR');
+  return value || resultT.unknown;
 }
 
 function normalizeDisplayKey(key = '') {
@@ -92,25 +92,27 @@ function normalizeDisplayKey(key = '') {
 function ResultCard({ result, t }) {
   if (!result) return null;
   const fields = Object.entries(result.analysis.fields || {});
+  const responseLang = result.analysis.response_language || (t.result.yes === 'Yes' ? 'en' : 'fr');
+  const resultT = T[responseLang]?.result || t.result;
   const criteriaLabels = Object.fromEntries((result.submittedCriteria || result.criteria || []).map(c => [normalizeDisplayKey(c.key), c.displayKey || c.key || c.label]));
   return (
     <section className="result-card" id="result">
       <div className="result-head">
-        <span className="eyebrow">{t.result.eyebrow}</span>
-        <h2>{result.analysis.company_name || t.result.prospect}</h2>
+        <span className="eyebrow">{resultT.eyebrow}</span>
+        <h2>{result.analysis.company_name || resultT.prospect}</h2>
         <p className="result-summary">{result.analysis.summary}</p>
       </div>
       <div className="result-meta">
-        <span>{t.result.site} {result.analysis.url || result.extracted?.finalUrl}</span>
+        <span>{resultT.site} {result.analysis.url || result.extracted?.finalUrl}</span>
       </div>
       <table className="signal-table">
-        <thead><tr><th aria-label="signal"></th><th>{t.result.answer}</th><th>{t.result.confidence}</th></tr></thead>
+        <thead><tr><th aria-label="signal"></th><th>{resultT.answer}</th><th>{resultT.confidence}</th></tr></thead>
         <tbody>
           {fields.map(([key, item]) => (
             <tr key={key}>
               <td className="sig-label">{criteriaLabels[key] || key}</td>
               <td className={`sig-answer ${typeof item.answer === 'boolean' ? (item.answer ? 'yes' : 'no') : ''}`}>
-                {formatAnswer(item.answer, t.result)}
+                {formatAnswer(item.answer, resultT, responseLang)}
               </td>
               <td className="sig-conf">
                 <span className="conf-bar"><span className="conf-fill" style={{width: `${Math.round((item.confidence || 0)*100)}%`}} /></span>
