@@ -101,7 +101,7 @@ async function fetchWebsite(url) {
     const response = await fetch(url, {
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 WebbbyBot/0.1 (+https://webbby.vercel.app)',
+        'User-Agent': 'Mozilla/5.0 WebbbyBot/0.1 (+https://webbby.artikle.org)',
         'Accept': 'text/html,application/xhtml+xml,text/plain;q=0.9,*/*;q=0.8'
       }
     });
@@ -153,7 +153,7 @@ export default async function handler(req, res) {
       headers: {
         'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
         'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.PUBLIC_SITE_URL || 'https://webbby.vercel.app',
+        'HTTP-Referer': process.env.PUBLIC_SITE_URL || 'https://webbby.artikle.org',
         'X-Title': 'Webbby'
       },
       body: JSON.stringify({
