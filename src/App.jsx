@@ -48,14 +48,14 @@ const T = {
   }
 };
 
-function FieldRow({ field, index, update, remove, t }) {
+function FieldRow({ field, index, update, remove, t, types }) {
   return (
     <div className="field-row">
       <input aria-label="signal name" value={field.key} onChange={e => update(index, { key: e.target.value })} placeholder={t.fieldKeyPlaceholder} />
       <select aria-label="expected format" value={field.type} onChange={e => update(index, { type: e.target.value })}>
-        <option value="boolean">{t.types.boolean}</option>
-        <option value="string">{t.types.string}</option>
-        <option value="number">{t.types.number}</option>
+        <option value="boolean">{types.boolean}</option>
+        <option value="string">{types.string}</option>
+        <option value="number">{types.number}</option>
       </select>
       <input className="question" aria-label="sales question" value={field.label} onChange={e => update(index, { label: e.target.value })} placeholder={t.fieldPlaceholder} />
       <button className="icon-btn" type="button" onClick={() => remove(index)} aria-label="remove signal"><Trash2 size={16} /></button>
@@ -194,7 +194,7 @@ function App() {
         <form onSubmit={analyze} className="analyzer">
           <label>{t.form.urlLabel}<input value={url} onChange={e => setUrl(e.target.value)} placeholder={t.form.urlPlaceholder} required /></label>
           <div className="criteria-head"><div><strong>{t.form.signalsLabel}</strong><span>{t.form.signalsHint}</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>{t.form.addSignal}</button></div>
-          <div className="field-list">{criteria.map((field, index) => <FieldRow key={index} field={field} index={index} update={update} remove={remove} t={t.form} />)}</div>
+          <div className="field-list">{criteria.map((field, index) => <FieldRow key={index} field={field} index={index} update={update} remove={remove} t={t.form} types={t.types} />)}</div>
           {error && <div className="error">{error}</div>}
           <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? t.form.loading : t.form.submit}</button>
           <p className="microcopy">{t.form.microcopy}</p>
