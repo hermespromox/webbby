@@ -25,10 +25,10 @@ const T = {
     final: { title: 'Webbby AI crée un brief sales en 10 secondes.', desc: 'À partir d’un site → Webbby AI vous sort les signaux qui comptent. À partir de 4,99€.', cta: 'Analyser un site' },
     footer: 'Qualification commerciale depuis les sites web publics',
     starterCriteria: [
-      { key: 'B2B', type: 'boolean', label: "L'entreprise vend-elle surtout à d'autres entreprises (B2B)?" },
-      { key: 'Client cible', type: 'string', label: 'Qui est le client idéal de cette entreprise ?' },
-      { key: 'International', type: 'boolean', label: "Sont-ils présents à l'international?" },
-      { key: 'Clients', type: 'string', label: 'Noms de leurs clients actuels?' }
+      { key: 'Assurance', type: 'boolean', label: 'Est-ce que cette entreprise est une assurance ?' },
+      { key: 'Produits', type: 'string', label: "Si c'est une assurance, quels produits vend-elle ?" },
+      { key: 'Spécialisée', type: 'boolean', label: 'Est-ce une assurance spécialisée dans un type de produit ?' },
+      { key: 'Portail client', type: 'string', label: 'Ont-ils un portail dédié avec un espace client ?' }
     ]
   },
   en: {
@@ -52,10 +52,10 @@ const T = {
     final: { title: 'Webbby AI creates a sales brief in 10 seconds.', desc: 'From a website → Webbby AI pulls out the signals that matter. Starts at €4.99.', cta: 'Analyze a site' },
     footer: 'Sales qualification from public websites',
     starterCriteria: [
-      { key: 'B2B', type: 'boolean', label: 'Does this company primarily sell to other businesses (B2B)?' },
-      { key: 'Target customer', type: 'string', label: 'Who is this company\'s ideal customer?' },
-      { key: 'International', type: 'boolean', label: 'Are they present internationally?' },
-      { key: 'Customers', type: 'string', label: 'Names of their current customers?' }
+      { key: 'Insurance', type: 'boolean', label: 'Is this company an insurance provider?' },
+      { key: 'Products', type: 'string', label: 'If it is an insurance provider, what products does it sell?' },
+      { key: 'Specialized', type: 'boolean', label: 'Is it specialized in one type of insurance product?' },
+      { key: 'Customer portal', type: 'string', label: 'Do they have a dedicated customer portal or customer account area?' }
     ]
   }
 };
@@ -129,7 +129,7 @@ function App() {
     if (typeof localStorage !== 'undefined') return localStorage.getItem('webbby_lang') || 'fr';
     return 'fr';
   });
-  const [url, setUrl] = useState('https://mistral.ai');
+  const [url, setUrl] = useState('https://bullebleue.fr');
   const [criteria, setCriteria] = useState(T[lang].starterCriteria);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
