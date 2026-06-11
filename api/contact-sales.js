@@ -15,7 +15,7 @@ function sendJson(res, status, payload) {
   res.end(JSON.stringify(payload));
 }
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return sendJson(res, 405, { ok: false, error: 'Method not allowed' });
   }
