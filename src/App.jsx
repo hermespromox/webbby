@@ -130,7 +130,7 @@ function App() {
 
       <section className="trustbar">
         <div><strong>10 s</strong><span>pour qualifier un prospect</span></div>
-        <div><strong>12</strong><span>signaux personnalisables</span></div>
+        <div><strong>∞</strong><span>signaux personnalisables</span></div>
         <div><strong>1 page</strong><span>brief lisible pour l'équipe sales</span></div>
         <div><strong>0</strong><span>recherche manuelle</span></div>
       </section>
