@@ -1,25 +1,31 @@
-import React, { useMemo, useState } from 'react';
-import { ArrowRight, Braces, CheckCircle2, Copy, Globe2, KeyRound, Loader2, Plus, ShieldCheck, Sparkles, Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, BriefcaseBusiness, CheckCircle2, Globe2, Loader2, Plus, SearchCheck, Sparkles, Target, Trash2, TrendingUp, UsersRound } from 'lucide-react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 
 const starterCriteria = [
-  { key: 'is_b2b', label: "Est-ce que l'entreprise vend principalement à d'autres entreprises ?", type: 'boolean' },
-  { key: 'target_customer', label: 'Décris le client cible principal.', type: 'string' },
-  { key: 'pricing_visible', label: 'Est-ce que des prix ou plans tarifaires sont visibles ?', type: 'boolean' }
+  { key: 'Fit B2B', label: "L'entreprise vend-elle surtout à d'autres entreprises ?", type: 'boolean' },
+  { key: 'Client cible', label: 'Qui est le client idéal de cette entreprise ?', type: 'string' },
+  { key: 'Signal budget', label: 'Le site montre-t-il un budget, des offres ou une intention d’achat ?', type: 'boolean' }
 ];
+
+const typeLabels = {
+  boolean: 'Oui / Non',
+  string: 'Réponse courte',
+  number: 'Score ou nombre'
+};
 
 function FieldRow({ field, index, update, remove }) {
   return (
     <div className="field-row">
-      <input aria-label="clé JSON" value={field.key} onChange={e => update(index, { key: e.target.value })} placeholder="is_b2b" />
-      <select aria-label="type de réponse" value={field.type} onChange={e => update(index, { type: e.target.value })}>
-        <option value="boolean">boolean</option>
-        <option value="string">string</option>
-        <option value="number">number</option>
+      <input aria-label="nom du signal" value={field.key} onChange={e => update(index, { key: e.target.value })} placeholder="Fit B2B" />
+      <select aria-label="format attendu" value={field.type} onChange={e => update(index, { type: e.target.value })}>
+        <option value="boolean">Oui / Non</option>
+        <option value="string">Réponse courte</option>
+        <option value="number">Score ou nombre</option>
       </select>
-      <input className="question" aria-label="question d'analyse" value={field.label} onChange={e => update(index, { label: e.target.value })} placeholder="Question à analyser" />
-      <button className="icon-btn" type="button" onClick={() => remove(index)} aria-label="supprimer le critère"><Trash2 size={16} /></button>
+      <input className="question" aria-label="question sales" value={field.label} onChange={e => update(index, { label: e.target.value })} placeholder="Ce que vous voulez savoir sur le prospect" />
+      <button className="icon-btn" type="button" onClick={() => remove(index)} aria-label="supprimer le signal"><Trash2 size={16} /></button>
     </div>
   );
 }
@@ -31,44 +37,32 @@ function formatAnswer(value) {
 }
 
 function ResultCard({ result }) {
-  const [copied, setCopied] = useState(false);
   if (!result) return null;
-  const text = JSON.stringify(result.analysis, null, 2);
   const fields = Object.entries(result.analysis.fields || {});
-  async function copy() {
-    await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1200);
-  }
   return (
     <section className="result-card ux-result" id="result">
       <div className="section-head compact">
         <div>
-          <span className="eyebrow">Résultat lisible</span>
-          <h2>{result.analysis.company_name || 'Analyse du site'}</h2>
+          <span className="eyebrow">Compte rendu sales</span>
+          <h2>{result.analysis.company_name || 'Prospect analysé'}</h2>
           <p>{result.analysis.summary}</p>
         </div>
-        <button className="secondary small" type="button" onClick={copy}><Copy size={16} />{copied ? 'JSON copié' : 'Copier le JSON'}</button>
       </div>
-      <div className="summary-grid">
+      <div className="summary-grid sales-summary">
         <div><span>Site analysé</span><strong>{result.analysis.url || result.extracted?.finalUrl}</strong></div>
-        <div><span>Modèle</span><strong>GPT-5.4 Nano · reasoning xhigh</strong></div>
-        <div><span>Extraction</span><strong>{result.extracted?.chars?.toLocaleString('fr-FR')} caractères</strong></div>
+        <div><span>Lecture rapide</span><strong>Signaux commerciaux prêts à utiliser</strong></div>
+        <div><span>Prochaine étape</span><strong>Prioriser, qualifier, contacter</strong></div>
       </div>
       <div className="answer-grid">
         {fields.map(([key, item]) => (
           <article className="answer-card" key={key}>
-            <div className="answer-top"><code>{key}</code><span>{Math.round((item.confidence || 0) * 100)}% confiance</span></div>
+            <div className="answer-top"><span>{item.title || key}</span><em>{Math.round((item.confidence || 0) * 100)}% sûr</em></div>
             <strong className={typeof item.answer === 'boolean' ? (item.answer ? 'yes' : 'no') : ''}>{formatAnswer(item.answer)}</strong>
             <p>{item.reasoning}</p>
             <ul>{(item.evidence || []).map((evidence, i) => <li key={i}>{evidence}</li>)}</ul>
           </article>
         ))}
       </div>
-      <details className="raw-json">
-        <summary>Voir la réponse JSON brute</summary>
-        <pre>{text}</pre>
-      </details>
     </section>
   );
 }
@@ -79,11 +73,6 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
-
-  const schemaPreview = useMemo(() => {
-    const fields = Object.fromEntries(criteria.filter(c => c.key).map(c => [c.key, { answer: c.type, confidence: 'number', evidence: ['string'] }]));
-    return JSON.stringify({ url: 'string', company_name: 'string', summary: 'string', fields }, null, 2);
-  }, [criteria]);
 
   function update(index, patch) {
     setCriteria(items => items.map((item, i) => i === index ? { ...item, ...patch } : item));
@@ -118,77 +107,86 @@ function App() {
   return (
     <main>
       <nav className="nav">
-        <a className="brand" href="#top" aria-label="Webbby home"><span className="logo"><Braces size={22} /></span><span>Webbby</span></a>
-        <div className="nav-links"><a href="#demo">Démo</a><a href="#features">Fonctions</a><a href="#pricing">Prix</a><a href="#faq">FAQ</a></div>
-        <a className="nav-cta" href="#demo">Analyser <ArrowRight size={16} /></a>
+        <a className="brand" href="#top" aria-label="Webbby home"><span className="logo"><SearchCheck size={22} /></span><span>Webbby</span></a>
+        <div className="nav-links"><a href="#demo">Tester</a><a href="#features">Signaux</a><a href="#pricing">Offre</a><a href="#faq">FAQ</a></div>
+        <a className="nav-cta" href="#demo">Qualifier un prospect <ArrowRight size={16} /></a>
       </nav>
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <span className="eyebrow"><Sparkles size={14}/> Website intelligence → JSON</span>
-          <h1>Transformez n'importe quel site web en analyse structurée.</h1>
-          <p>Webbby prend une URL, vos critères key/value, puis force OpenRouter à répondre en JSON Schema strict : booléens, textes, scores, preuves et confiance.</p>
-          <div className="hero-actions"><a className="primary" href="#demo">Lancer une analyse <ArrowRight size={18}/></a><a className="secondary" href="#features">Voir le fonctionnement</a></div>
-          <div className="proof-row"><span><CheckCircle2 size={16}/> JSON validable</span><span><ShieldCheck size={16}/> Clé serveur uniquement</span><span><Globe2 size={16}/> Extraction site live</span></div>
+          <span className="eyebrow"><Sparkles size={14}/> Sales research instantané</span>
+          <h1>Avant d'appeler un prospect, sachez déjà s'il vaut le coup.</h1>
+          <p>Collez le site d’une entreprise. Webbby lit la page et ressort les signaux utiles pour un commercial : fit B2B, client cible, preuve d’achat, angle d’approche et niveau de confiance.</p>
+          <div className="hero-actions"><a className="primary" href="#demo">Analyser un prospect <ArrowRight size={18}/></a><a className="secondary" href="#features">Voir les signaux</a></div>
+          <div className="proof-row"><span><CheckCircle2 size={16}/> Résumé actionnable</span><span><Target size={16}/> Signaux de qualification</span><span><Globe2 size={16}/> Depuis le site public</span></div>
         </div>
-        <div className="hero-panel">
-          <div className="panel-top"><span></span><span></span><span></span></div>
-          <pre>{schemaPreview}</pre>
+        <div className="hero-panel sales-panel" aria-label="Exemple d'analyse sales">
+          <div className="lead-card hero-lead-card">
+            <span className="lead-label">Prospect repéré</span>
+            <h3>Acme Benefits</h3>
+            <p>Plateforme RH pour entreprises de 50 à 5 000 salariés.</p>
+            <div className="score-ring"><strong>86</strong><span>/100 fit</span></div>
+          </div>
+          <div className="signal-stack">
+            <div><span>Fit B2B</span><strong>Oui</strong><small>Vend aux équipes RH et C-level.</small></div>
+            <div><span>Angle d’approche</span><strong>Réduction du coût d’acquisition</strong><small>Parler pipeline, comptes prioritaires et ROI.</small></div>
+            <div><span>Preuves</span><strong>3 signaux trouvés</strong><small>Pages offres, cas clients, vocabulaire entreprise.</small></div>
+          </div>
         </div>
       </section>
 
       <section className="trustbar">
-        <div><strong>12</strong><span>critères max par run</span></div>
-        <div><strong>30k</strong><span>caractères extraits</span></div>
-        <div><strong>strict</strong><span>OpenRouter JSON Schema</span></div>
-        <div><strong>0</strong><span>clé exposée côté client</span></div>
+        <div><strong>5 min</strong><span>pour qualifier une liste courte</span></div>
+        <div><strong>12</strong><span>signaux personnalisables</span></div>
+        <div><strong>1 page</strong><span>résumé lisible pour l’équipe sales</span></div>
+        <div><strong>0</strong><span>copier-coller dans un chat</span></div>
       </section>
 
       <section className="features" id="features">
-        <div className="section-head"><span className="eyebrow">Pourquoi Webbby</span><h2>Un vrai petit moteur d'analyse, pas un prompt bricolé.</h2></div>
+        <div className="section-head"><span className="eyebrow">Pour les équipes sales</span><h2>Moins de recherche manuelle. Plus de bons messages.</h2></div>
         <div className="cards">
-          <article><KeyRound/><h3>Secrets protégés</h3><p>La clé OpenRouter reste dans les variables d'environnement Vercel, jamais dans le navigateur.</p></article>
-          <article><Braces/><h3>JSON Schema strict</h3><p>Chaque critère devient une propriété structurée avec réponse, confiance, preuves et raisonnement court.</p></article>
-          <article><Globe2/><h3>Site live</h3><p>L'API récupère le HTML, extrait le texte exploitable, puis demande au modèle d'étayer ses réponses.</p></article>
+          <article><BriefcaseBusiness/><h3>Qualifiez le compte</h3><p>Comprenez rapidement si l’entreprise ressemble à votre client idéal.</p></article>
+          <article><UsersRound/><h3>Trouvez le bon angle</h3><p>Repérez à qui elle vend, ce qu’elle promet et quel problème commercial elle met en avant.</p></article>
+          <article><TrendingUp/><h3>Priorisez l’outreach</h3><p>Gardez les comptes avec des signaux forts et évitez les prospects trop flous.</p></article>
         </div>
       </section>
 
       <section className="how">
-        <div><span>01</span><h3>Collez une URL</h3><p>Ajoutez le site à qualifier : SaaS, cabinet, marketplace, média, etc.</p></div>
-        <div><span>02</span><h3>Définissez vos keys</h3><p>Exemple : <code>is_b2b</code>, <code>target_customer</code>, <code>pricing_visible</code>.</p></div>
-        <div><span>03</span><h3>Exportez le JSON</h3><p>Copiez la sortie pour enrichir un CRM, un scoring ou un workflow d'automatisation.</p></div>
+        <div><span>01</span><h3>Collez le site</h3><p>Un domaine, une landing page ou une page produit suffit pour démarrer.</p></div>
+        <div><span>02</span><h3>Choisissez vos signaux</h3><p>Fit B2B, cible, budget, maturité, angle d’approche, urgence, concurrence.</p></div>
+        <div><span>03</span><h3>Lisez le brief sales</h3><p>Vous obtenez des cartes claires avec réponse, confiance et preuves.</p></div>
       </section>
 
       <section className="demo" id="demo">
-        <div className="section-head"><span className="eyebrow">Démo live</span><h2>Analysez votre premier site</h2><p>Ajoutez, renommez ou supprimez les champs. Les noms deviennent les clés JSON finales.</p></div>
+        <div className="section-head"><span className="eyebrow">Testez maintenant</span><h2>Qualifiez un prospect depuis son site</h2><p>Ajoutez les signaux que votre équipe utilise déjà pour décider qui contacter en priorité.</p></div>
         <form onSubmit={analyze} className="analyzer">
-          <label>URL du site web<input value={url} onChange={e => setUrl(e.target.value)} placeholder="https://example.com" required /></label>
-          <div className="criteria-head"><div><strong>Critères key/value</strong><span>Chaque ligne devient un champ JSON structuré.</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>Ajouter</button></div>
+          <label>Site du prospect<input value={url} onChange={e => setUrl(e.target.value)} placeholder="https://entreprise.com" required /></label>
+          <div className="criteria-head"><div><strong>Signaux à vérifier</strong><span>Exemples : fit B2B, cible, budget, intention d’achat, angle d’approche.</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>Ajouter un signal</button></div>
           <div className="field-list">{criteria.map((field, index) => <FieldRow key={index} field={field} index={index} update={update} remove={remove} />)}</div>
           {error && <div className="error">{error}</div>}
-          <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? 'Analyse en cours…' : 'Analyser le site'}</button>
+          <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? 'Lecture du site…' : 'Obtenir le brief sales'}</button>
         </form>
         <ResultCard result={result} />
       </section>
 
       <section className="pricing" id="pricing">
-        <div className="section-head"><span className="eyebrow">Offre</span><h2>Simple pour démarrer, extensible ensuite.</h2></div>
+        <div className="section-head"><span className="eyebrow">Offre</span><h2>Un assistant de qualification pour votre pipeline.</h2></div>
         <div className="price-grid">
-          <article><span>Starter</span><h3>Gratuit</h3><p>Tester l'analyse URL + critères manuels.</p><ul><li>Démo live</li><li>Export JSON</li><li>Critères personnalisés</li></ul></article>
-          <article className="hot"><span>Pro</span><h3>Sur demande</h3><p>Pour brancher Webbby à un CRM, un scrapeur ou une base prospects.</p><ul><li>Batch URLs</li><li>Schémas sauvegardés</li><li>Webhooks/API</li></ul></article>
+          <article><span>Starter</span><h3>Gratuit</h3><p>Tester la qualification manuelle compte par compte.</p><ul><li>Analyse d’un site</li><li>Signaux personnalisés</li><li>Brief sales lisible</li></ul></article>
+          <article className="hot"><span>Pro</span><h3>Sur demande</h3><p>Pour traiter des listes de comptes et préparer l’outreach à grande échelle.</p><ul><li>Analyse en batch</li><li>Signaux d’équipe sauvegardés</li><li>Export CRM et workflows</li></ul></article>
         </div>
       </section>
 
       <section className="faq" id="faq">
         <div className="section-head"><span className="eyebrow">FAQ</span><h2>Questions fréquentes</h2></div>
-        <details open><summary>Est-ce que la clé OpenRouter est visible ?</summary><p>Non. Elle est lue uniquement par la fonction serverless Vercel.</p></details>
-        <details><summary>Pourquoi JSON Schema plutôt qu'un prompt JSON ?</summary><p>Le schéma force la structure et rend la sortie beaucoup plus fiable pour l'automatisation.</p></details>
-        <details><summary>Peut-on ajouter d'autres critères que is_b2b ?</summary><p>Oui. Ajoutez vos propres clés, questions et types : boolean, string ou number.</p></details>
-        <details><summary>Que se passe-t-il si le site bloque l'extraction ?</summary><p>L'API renvoie une erreur claire si elle ne récupère pas assez de texte exploitable.</p></details>
+        <details open><summary>À quoi sert Webbby pour un commercial ?</summary><p>À lire rapidement le site d’un prospect et ressortir les signaux qui aident à décider s’il faut le contacter, avec quel angle et quel niveau de priorité.</p></details>
+        <details><summary>Est-ce que je peux personnaliser les signaux ?</summary><p>Oui. Vous pouvez demander exactement ce que votre équipe regarde déjà : cible, budget, stack, maturité, intention, segment, urgence ou concurrence.</p></details>
+        <details><summary>Est-ce que Webbby remplace un commercial ?</summary><p>Non. Il prépare le terrain : recherche compte, qualification et brief avant l’appel ou l’email.</p></details>
+        <details><summary>Que se passe-t-il si le site est trop pauvre ?</summary><p>Webbby vous le signale au lieu d’inventer. Le brief reste basé sur les éléments réellement visibles sur le site.</p></details>
       </section>
 
-      <section className="final-cta"><h2>URL + critères → JSON exploitable.</h2><p>Un MVP sérieux pour qualifier des entreprises sans copier-coller dans un chat.</p><a className="primary inverse" href="#demo">Essayer Webbby</a></section>
-      <footer><strong>Webbby</strong><span>Built with the warm orange design system · OpenRouter structured outputs</span></footer>
+      <section className="final-cta"><h2>Transformez un site web en brief de prospection.</h2><p>Le bon compte, le bon angle, les bonnes preuves — avant le premier message.</p><a className="primary inverse" href="#demo">Qualifier un prospect</a></section>
+      <footer><strong>Webbby</strong><span>Qualification commerciale depuis les sites web publics</span></footer>
     </main>
   );
 }

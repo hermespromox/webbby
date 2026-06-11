@@ -67,12 +67,13 @@ function schemaFor(criteria) {
       type: 'object',
       additionalProperties: false,
       properties: {
-        answer: { type },
+        title: { type: 'string', maxLength: 60 },
+        answer: type === 'string' ? { type, maxLength: 140 } : { type },
         confidence: { type: 'number', minimum: 0, maximum: 1 },
-        evidence: { type: 'array', items: { type: 'string' }, minItems: 1, maxItems: 5 },
-        reasoning: { type: 'string' }
+        evidence: { type: 'array', items: { type: 'string', maxLength: 180 }, minItems: 1, maxItems: 4 },
+        reasoning: { type: 'string', maxLength: 260 }
       },
-      required: ['answer', 'confidence', 'evidence', 'reasoning']
+      required: ['title', 'answer', 'confidence', 'evidence', 'reasoning']
     };
   }
   return {
@@ -145,7 +146,7 @@ export default async function handler(req, res) {
 
     const schema = schemaFor(criteria);
     const criteriaText = criteria.map(c => `- ${c.key} (${c.type}): ${c.label}`).join('\n');
-    const prompt = `Analyse ce site web selon ces critères. Réponds strictement dans le schéma JSON.\n\nURL demandée: ${url.toString()}\nURL finale: ${site.finalUrl}\nHTTP: ${site.status}\nMeta: ${JSON.stringify(site.meta)}\n\nCritères:\n${criteriaText}\n\nContenu extrait:\n${site.text}`;
+    const prompt = `Tu aides une équipe commerciale à qualifier un prospect à partir de son site web. Analyse uniquement les informations fournies, sans inventer. Pour chaque signal, donne un titre lisible côté sales, une réponse courte, un niveau de confiance, une raison concise et des preuves sous forme de liste de phrases courtes.\n\nSite demandé: ${url.toString()}\nSite final: ${site.finalUrl}\nMeta: ${JSON.stringify(site.meta)}\n\nSignaux à vérifier:\n${criteriaText}\n\nTexte du site:\n${site.text}`;
 
     const openrouterResponse = await fetch(OPENROUTER_URL, {
       method: 'POST',
@@ -160,7 +161,7 @@ export default async function handler(req, res) {
         reasoning: { effort: 'xhigh' },
         temperature: 0.1,
         messages: [
-          { role: 'system', content: 'Tu es Webbby, un analyste web B2B. Tu dois fournir une réponse JSON structurée, concise, vérifiable, avec preuves tirées du contenu fourni. Ne fabrique pas de preuve.' },
+          { role: 'system', content: 'Tu es Webbby, un analyste de prospection B2B. Tu dois aider des équipes sales à décider si un compte mérite un message. Réponses courtes, preuves concrètes, aucun élément inventé. Les preuves doivent toujours être une liste de chaînes de texte.' },
           { role: 'user', content: prompt }
         ],
         response_format: {
