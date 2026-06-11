@@ -1,6 +1,15 @@
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const DEFAULT_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-5.4-nano';
 
+import { createClient } from '@supabase/supabase-js';
+
+function getSupabaseClient() {
+  const url = process.env.SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+}
+
 function json(res, status, payload) {
   res.statusCode = status;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -185,8 +194,8 @@ export default async function handler(req, res) {
     try { analysis = typeof content === 'string' ? JSON.parse(content) : content; }
     catch { return json(res, 502, { ok: false, error: 'Model did not return valid JSON', raw: content }); }
 
-    // Fire and forget — save to Supabase without blocking response
-    saveSearch(url.toString(), criteria, analysis).catch(() => {});
+    // Save to Supabase
+    await saveSearch(url.toString(), criteria, analysis);
 
     return json(res, 200, { ok: true, analysis, usage: payload.usage || null, model: payload.model || DEFAULT_MODEL, extracted: { status: site.status, finalUrl: site.finalUrl, chars: site.text.length } });
   } catch (error) {
@@ -196,15 +205,10 @@ export default async function handler(req, res) {
 
 async function saveSearch(url, criteria, result) {
   try {
-    const { getSupabase } = await import('./_lib/supabase.js');
-    const supabase = getSupabase();
+    const supabase = getSupabaseClient();
     if (!supabase) return;
-    await supabase.from('searches').insert({
-      url,
-      criteria,
-      result
-    });
+    await supabase.from('searches').insert({ url, criteria, result });
   } catch {
-    // silent — don't block the user if saving fails
+    // silent
   }
 }
