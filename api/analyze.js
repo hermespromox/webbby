@@ -138,11 +138,15 @@ export default async function handler(req, res) {
 
     const rawCriteria = Array.isArray(body.criteria) ? body.criteria : [];
     const criteria = rawCriteria
-      .map((c, i) => ({
-        key: normalizeKey(c.key || `field_${i + 1}`),
-        label: String(c.label || c.question || c.value || c.key || '').trim(),
-        type: ['boolean', 'string', 'number'].includes(c.type) ? c.type : 'string'
-      }))
+      .map((c, i) => {
+        const displayKey = String(c.key || `Signal ${i + 1}`).trim();
+        return {
+          key: normalizeKey(displayKey || `field_${i + 1}`),
+          displayKey,
+          label: String(c.label || c.question || c.value || c.key || '').trim(),
+          type: ['boolean', 'string', 'number'].includes(c.type) ? c.type : 'string'
+        };
+      })
       .filter(c => c.key && c.label)
       .slice(0, 12);
 

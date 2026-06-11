@@ -86,7 +86,7 @@ function normalizeDisplayKey(key = '') {
 function ResultCard({ result, t }) {
   if (!result) return null;
   const fields = Object.entries(result.analysis.fields || {});
-  const criteriaLabels = Object.fromEntries((result.submittedCriteria || result.criteria || []).map(c => [normalizeDisplayKey(c.key), c.key || c.label]));
+  const criteriaLabels = Object.fromEntries((result.submittedCriteria || result.criteria || []).map(c => [normalizeDisplayKey(c.key), c.displayKey || c.key || c.label]));
   return (
     <section className="result-card" id="result">
       <div className="result-head">
