@@ -1,5 +1,5 @@
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
-const DEFAULT_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini';
+const DEFAULT_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-5.4-nano';
 
 function json(res, status, payload) {
   res.statusCode = status;
@@ -157,6 +157,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: DEFAULT_MODEL,
+        reasoning: { effort: 'xhigh' },
         temperature: 0.1,
         messages: [
           { role: 'system', content: 'Tu es Webbby, un analyste web B2B. Tu dois fournir une réponse JSON structurée, concise, vérifiable, avec preuves tirées du contenu fourni. Ne fabrique pas de preuve.' },

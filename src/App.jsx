@@ -24,28 +24,51 @@ function FieldRow({ field, index, update, remove }) {
   );
 }
 
+function formatAnswer(value) {
+  if (typeof value === 'boolean') return value ? 'Oui' : 'Non';
+  if (typeof value === 'number') return value.toLocaleString('fr-FR');
+  return value || 'Non déterminé';
+}
+
 function ResultCard({ result }) {
   const [copied, setCopied] = useState(false);
   if (!result) return null;
   const text = JSON.stringify(result.analysis, null, 2);
+  const fields = Object.entries(result.analysis.fields || {});
   async function copy() {
     await navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
   }
   return (
-    <section className="result-card" id="result">
+    <section className="result-card ux-result" id="result">
       <div className="section-head compact">
-        <span className="eyebrow">JSON structuré</span>
-        <h2>Analyse prête à exporter</h2>
-        <button className="secondary small" type="button" onClick={copy}><Copy size={16} />{copied ? 'Copié' : 'Copier JSON'}</button>
+        <div>
+          <span className="eyebrow">Résultat lisible</span>
+          <h2>{result.analysis.company_name || 'Analyse du site'}</h2>
+          <p>{result.analysis.summary}</p>
+        </div>
+        <button className="secondary small" type="button" onClick={copy}><Copy size={16} />{copied ? 'JSON copié' : 'Copier le JSON'}</button>
       </div>
       <div className="summary-grid">
-        <div><span>Entreprise</span><strong>{result.analysis.company_name || 'Non détecté'}</strong></div>
-        <div><span>Modèle</span><strong>{result.model}</strong></div>
+        <div><span>Site analysé</span><strong>{result.analysis.url || result.extracted?.finalUrl}</strong></div>
+        <div><span>Modèle</span><strong>GPT-5.4 Nano · reasoning xhigh</strong></div>
         <div><span>Extraction</span><strong>{result.extracted?.chars?.toLocaleString('fr-FR')} caractères</strong></div>
       </div>
-      <pre>{text}</pre>
+      <div className="answer-grid">
+        {fields.map(([key, item]) => (
+          <article className="answer-card" key={key}>
+            <div className="answer-top"><code>{key}</code><span>{Math.round((item.confidence || 0) * 100)}% confiance</span></div>
+            <strong className={typeof item.answer === 'boolean' ? (item.answer ? 'yes' : 'no') : ''}>{formatAnswer(item.answer)}</strong>
+            <p>{item.reasoning}</p>
+            <ul>{(item.evidence || []).map((evidence, i) => <li key={i}>{evidence}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+      <details className="raw-json">
+        <summary>Voir la réponse JSON brute</summary>
+        <pre>{text}</pre>
+      </details>
     </section>
   );
 }
