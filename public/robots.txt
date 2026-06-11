@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://webbby.artikle.org/sitemap.xml
