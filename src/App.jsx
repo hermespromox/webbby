@@ -5,7 +5,7 @@ import './styles.css';
 
 const T = {
   fr: {
-    nav: { test: 'Tester', signals: 'Signaux', offer: 'Tarifs', faq: 'FAQ', cta: 'Qualifier un prospect' },
+    nav: { test: 'Tester', signals: 'Signaux', offer: 'Tarifs', faq: 'FAQ', contact: 'Nous contacter', cta: 'Qualifier un prospect' },
     hero: { eyebrow: 'Brief sales en 10 secondes', title: 'Un brief sales en 10 secondes.', desc: "Collez le site d'un prospect. Webbby lit la page et ressort les signaux qui comptent pour un commercial : fit B2B, profil acheteur, signaux d'achat, angle d'approche et preuves concrètes.", cta: 'Analyser un site' },
     proof: { free: '200+ utilisateurs', speed: 'Résultat en < 10 secondes', anywhere: "Depuis n'importe quel site public" },
     trustbar: { users: 'utilisateurs', time: 'pour qualifier un prospect', signals: 'signaux personnalisables', page: "brief lisible pour l'équipe sales", manual: 'recherche manuelle' },
@@ -29,7 +29,7 @@ const T = {
     ]
   },
   en: {
-    nav: { test: 'Try it', signals: 'Signals', offer: 'Pricing', faq: 'FAQ', cta: 'Qualify a prospect' },
+    nav: { test: 'Try it', signals: 'Signals', offer: 'Pricing', faq: 'FAQ', contact: 'Contact us', cta: 'Qualify a prospect' },
     hero: { eyebrow: 'Sales brief in 10 seconds', title: 'A sales brief in 10 seconds.', desc: "Paste a prospect's site. Webbby reads the page and surfaces the signals that matter: B2B fit, buyer profile, purchase intent, approach angle, and hard evidence.", cta: 'Analyze a site' },
     proof: { free: 'Trusted by 200+ users', speed: 'Result in < 10 seconds', anywhere: 'From any public website' },
     trustbar: { users: 'users', time: 'to qualify a prospect', signals: 'customizable signals', page: 'readable brief for sales teams', manual: 'manual research' },
@@ -183,6 +183,7 @@ function App() {
         <a className="brand" href="#top" aria-label="Webbby home"><span className="logo"><SearchCheck size={22} /></span><span>Webbby</span></a>
         <div className="nav-links"><a href="#demo">{t.nav.test}</a><a href="#features">{t.nav.signals}</a><a href="#pricing">{t.nav.offer}</a><a href="#faq">{t.nav.faq}</a></div>
         <div className="nav-right">
+          <a className="contact-link" href="#contact-sales">{t.nav.contact}</a>
           <div className="lang-toggle">
             <button className={lang === 'fr' ? 'active' : ''} onClick={() => switchLang('fr')} aria-label="Français">FR</button>
             <button className={lang === 'en' ? 'active' : ''} onClick={() => switchLang('en')} aria-label="English">EN</button>
