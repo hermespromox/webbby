@@ -23,9 +23,10 @@ const T = {
     final: { title: 'Webbby AI crée un brief sales en 10 secondes.', desc: 'À partir d’un site → Webbby AI vous sort les signaux qui comptent. À partir de 4,99€.', cta: 'Analyser un site' },
     footer: 'Qualification commerciale depuis les sites web publics',
     starterCriteria: [
-      { key: 'Fit B2B', type: 'boolean', label: "L'entreprise vend-elle surtout à d'autres entreprises ?" },
+      { key: 'B2B', type: 'boolean', label: "L'entreprise vend-elle surtout à d'autres entreprises (B2B)?" },
       { key: 'Client cible', type: 'string', label: 'Qui est le client idéal de cette entreprise ?' },
-      { key: 'Signal budget', type: 'boolean', label: 'Le site montre-t-il un budget, des offres ou une intention d’achat ?' }
+      { key: 'International', type: 'boolean', label: "Sont-ils présents à l'international?" },
+      { key: 'Clients', type: 'string', label: 'Noms de leurs clients actuels?' }
     ]
   },
   en: {
@@ -47,9 +48,10 @@ const T = {
     final: { title: 'Webbby AI creates a sales brief in 10 seconds.', desc: 'From a website → Webbby AI pulls out the signals that matter. Starts at €4.99.', cta: 'Analyze a site' },
     footer: 'Sales qualification from public websites',
     starterCriteria: [
-      { key: 'B2B Fit', type: 'boolean', label: 'Does this company primarily sell to other businesses?' },
+      { key: 'B2B', type: 'boolean', label: 'Does this company primarily sell to other businesses (B2B)?' },
       { key: 'Target customer', type: 'string', label: 'Who is this company\'s ideal customer?' },
-      { key: 'Budget signal', type: 'boolean', label: 'Does the site show pricing, offers, or purchase intent?' }
+      { key: 'International', type: 'boolean', label: 'Are they present internationally?' },
+      { key: 'Customers', type: 'string', label: 'Names of their current customers?' }
     ]
   }
 };
@@ -123,7 +125,7 @@ function App() {
     if (typeof localStorage !== 'undefined') return localStorage.getItem('webbby_lang') || 'fr';
     return 'fr';
   });
-  const [url, setUrl] = useState('https://artikle.io');
+  const [url, setUrl] = useState('https://mistral.ai');
   const [criteria, setCriteria] = useState(T[lang].starterCriteria);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
