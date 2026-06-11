@@ -185,8 +185,26 @@ export default async function handler(req, res) {
     try { analysis = typeof content === 'string' ? JSON.parse(content) : content; }
     catch { return json(res, 502, { ok: false, error: 'Model did not return valid JSON', raw: content }); }
 
+    // Fire and forget — save to Supabase without blocking response
+    saveSearch(url.toString(), criteria, analysis).catch(() => {});
+
     return json(res, 200, { ok: true, analysis, usage: payload.usage || null, model: payload.model || DEFAULT_MODEL, extracted: { status: site.status, finalUrl: site.finalUrl, chars: site.text.length } });
   } catch (error) {
     return json(res, 500, { ok: false, error: error.message || 'Unexpected error' });
+  }
+}
+
+async function saveSearch(url, criteria, result) {
+  try {
+    const { getSupabase } = await import('./_lib/supabase.js');
+    const supabase = getSupabase();
+    if (!supabase) return;
+    await supabase.from('searches').insert({
+      url,
+      criteria,
+      result
+    });
+  } catch {
+    // silent — don't block the user if saving fails
   }
 }
