@@ -5,6 +5,11 @@ a{color:inherit;text-decoration:none}button,input,select{font:inherit}main{overf
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--strong);font-size:20px}
 .logo{width:38px;height:38px;border-radius:14px;background:var(--accent);color:white;display:grid;place-items:center;box-shadow:0 10px 30px rgba(255,72,1,.28)}
 .nav-links{display:flex;gap:22px;color:var(--muted);font-size:14px}.nav-links a:hover{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.lang-toggle{display:flex;gap:2px;background:var(--elevated);border-radius:10px;padding:3px}
+.lang-toggle button{border:none;background:none;color:var(--muted);font-size:12px;font-weight:800;padding:5px 10px;border-radius:8px;cursor:pointer;transition:all .15s ease}
+.lang-toggle button.active{background:white;color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.lang-toggle button:hover:not(.active){color:var(--strong)}
 .nav-cta,.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:9999px;border:1px solid transparent;font-weight:700;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
 .nav-cta,.primary{background:var(--accent);color:white;padding:13px 20px;box-shadow:0 12px 34px rgba(255,72,1,.24)}
 .nav-cta:hover,.primary:hover{background:var(--accent-hover);transform:translateY(-2px)}
