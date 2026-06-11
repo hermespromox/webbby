@@ -146,6 +146,19 @@ function App() {
         <div><strong>0</strong><span>recherche manuelle</span></div>
       </section>
 
+      <section className="demo" id="demo">
+        <div className="section-head"><span className="eyebrow">Testez maintenant</span><h2>Qualifiez un prospect depuis son site</h2><p>Ajoutez les signaux que votre équipe utilise déjà pour décider qui contacter en priorité.</p></div>
+        <form onSubmit={analyze} className="analyzer">
+          <label>Site du prospect<input value={url} onChange={e => setUrl(e.target.value)} placeholder="Collez le site de votre prospect... ex: https://acme.com" required /></label>
+          <div className="criteria-head"><div><strong>Signaux à vérifier</strong><span>Fit B2B, profil acheteur, signaux d'achat, angle d'approche, preuves.</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>Ajouter un signal</button></div>
+          <div className="field-list">{criteria.map((field, index) => <FieldRow key={index} field={field} index={index} update={update} remove={remove} />)}</div>
+          {error && <div className="error">{error}</div>}
+          <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? 'Lecture du site…' : 'Analyser ce site'}</button>
+          <p className="microcopy">Gratuit · Sans inscription · Résultat en moins de 10 secondes</p>
+        </form>
+        <ResultCard result={result} />
+      </section>
+
       <section className="features" id="features">
         <div className="section-head"><span className="eyebrow">Pour les équipes sales</span><h2>Moins de recherche manuelle. Plus de bons messages.</h2></div>
         <div className="cards">
@@ -159,19 +172,6 @@ function App() {
         <div><span>01</span><h3>Collez le site</h3><p>Un domaine, une landing page ou une page produit suffit pour démarrer.</p></div>
         <div><span>02</span><h3>Choisissez vos signaux</h3><p>Fit B2B, cible, budget, maturité, angle d’approche, urgence, concurrence.</p></div>
         <div><span>03</span><h3>Lisez le brief sales</h3><p>Vous obtenez des cartes claires avec réponse, confiance et preuves.</p></div>
-      </section>
-
-      <section className="demo" id="demo">
-        <div className="section-head"><span className="eyebrow">Testez maintenant</span><h2>Qualifiez un prospect depuis son site</h2><p>Ajoutez les signaux que votre équipe utilise déjà pour décider qui contacter en priorité.</p></div>
-        <form onSubmit={analyze} className="analyzer">
-          <label>Site du prospect<input value={url} onChange={e => setUrl(e.target.value)} placeholder="Collez le site de votre prospect... ex: https://acme.com" required /></label>
-          <div className="criteria-head"><div><strong>Signaux à vérifier</strong><span>Fit B2B, profil acheteur, signaux d'achat, angle d'approche, preuves.</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>Ajouter un signal</button></div>
-          <div className="field-list">{criteria.map((field, index) => <FieldRow key={index} field={field} index={index} update={update} remove={remove} />)}</div>
-          {error && <div className="error">{error}</div>}
-          <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? 'Lecture du site…' : 'Analyser ce site'}</button>
-          <p className="microcopy">Gratuit · Sans inscription · Résultat en moins de 10 secondes</p>
-        </form>
-        <ResultCard result={result} />
       </section>
 
       <section className="pricing" id="pricing">
