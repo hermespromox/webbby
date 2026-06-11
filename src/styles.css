@@ -67,15 +67,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 .result-summary{color:var(--muted);font-size:15px;line-height:1.5;margin:0}
 .result-meta{padding:0 28px 16px;color:var(--muted);font-size:13px}
 
-.signal-table{width:100%;border-collapse:collapse;margin:0}
+.signal-table{width:100%;border-collapse:collapse;margin:0;table-layout:fixed}
 .signal-table thead th{text-align:left;padding:14px 28px 10px;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:800;border-bottom:1px solid var(--border)}
-.signal-table tbody td{padding:16px 28px;border-bottom:1px solid var(--border);vertical-align:middle}
+.signal-table thead th:first-child{width:32%}
+.signal-table thead th:nth-child(2){width:50%}
+.signal-table thead th:nth-child(3){width:18%}
+.signal-table tbody td{padding:16px 28px;border-bottom:1px solid var(--border);vertical-align:top;word-break:normal;overflow-wrap:anywhere}
 .signal-table tbody tr:last-child td{border-bottom:none}
 .signal-table tbody tr:hover{background:var(--elevated)}
 .sig-label{font-weight:700;color:var(--strong);font-size:15px}
-.sig-answer{font-weight:800;font-size:16px;color:var(--text)}
-.sig-answer.yes{color:#148500}
-.sig-answer.no{color:#b62f00}
+.sig-answer{font-weight:500;font-size:16px;line-height:1.45;color:var(--text)}
+.sig-answer.yes{color:#148500;font-weight:900}
+.sig-answer.no{color:#b62f00;font-weight:900}
 .sig-conf{white-space:nowrap;font-size:14px;color:var(--muted);font-weight:700;min-width:120px}
 .conf-bar{display:inline-block;width:60px;height:6px;background:var(--border);border-radius:3px;margin-right:10px;vertical-align:middle;overflow:hidden}
 .conf-fill{display:block;height:100%;background:var(--accent);border-radius:3px;transition:width .4s ease}

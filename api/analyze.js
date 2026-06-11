@@ -197,7 +197,7 @@ export default async function handler(req, res) {
     // Save to Supabase
     await saveSearch(url.toString(), criteria, analysis);
 
-    return json(res, 200, { ok: true, analysis, usage: payload.usage || null, model: payload.model || DEFAULT_MODEL, extracted: { status: site.status, finalUrl: site.finalUrl, chars: site.text.length } });
+    return json(res, 200, { ok: true, analysis, criteria, usage: payload.usage || null, model: payload.model || DEFAULT_MODEL, extracted: { status: site.status, finalUrl: site.finalUrl, chars: site.text.length } });
   } catch (error) {
     return json(res, 500, { ok: false, error: error.message || 'Unexpected error' });
   }
