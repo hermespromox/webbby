@@ -112,29 +112,18 @@ function App() {
         <a className="nav-cta" href="#demo">Qualifier un prospect <ArrowRight size={16} /></a>
       </nav>
 
-      <section className="hero" id="top">
+      <section className="hero hero-simple" id="top">
         <div className="hero-copy">
           <span className="eyebrow"><Sparkles size={14}/> Brief sales en 10 secondes</span>
           <h1>Un brief sales en 10 secondes.</h1>
           <p>Collez le site d'un prospect. Webbby lit la page et ressort les signaux qui comptent pour un commercial : fit B2B, profil acheteur, signaux d'achat, angle d'approche et preuves concrètes.</p>
-          <div className="hero-actions"><a className="primary" href="#demo">Analyser un site <ArrowRight size={18}/></a><a className="secondary" href="#features">Voir les signaux</a></div>
+          <div className="hero-actions">
+            <a className="primary hero-cta-lg" href="#demo">Analyser un site <ArrowRight size={20}/></a>
+          </div>
           <div className="proof-row">
             <span><CheckCircle2 size={16}/> Gratuit · Sans inscription</span>
             <span><Target size={16}/> Résultat en &lt; 10 secondes</span>
             <span><Globe2 size={16}/> Depuis n'importe quel site public</span>
-          </div>
-        </div>
-        <div className="hero-panel sales-panel" aria-label="Exemple d'analyse sales">
-          <div className="lead-card hero-lead-card">
-            <span className="lead-label">Prospect repéré</span>
-            <h3>Acme Benefits</h3>
-            <p>Plateforme RH pour entreprises de 50 à 5 000 salariés.</p>
-            <div className="score-ring"><strong>86</strong><span>/100 fit</span></div>
-          </div>
-          <div className="signal-stack">
-            <div><span>Fit B2B</span><strong>Oui</strong><small>Vend aux équipes RH et C-level.</small></div>
-            <div><span>Angle d’approche</span><strong>Réduction du coût d’acquisition</strong><small>Parler pipeline, comptes prioritaires et ROI.</small></div>
-            <div><span>Preuves</span><strong>3 signaux trouvés</strong><small>Pages offres, cas clients, vocabulaire entreprise.</small></div>
           </div>
         </div>
       </section>
