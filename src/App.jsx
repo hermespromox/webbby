@@ -114,11 +114,15 @@ function App() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <span className="eyebrow"><Sparkles size={14}/> Sales research instantané</span>
-          <h1>Avant d'appeler un prospect, sachez déjà s'il vaut le coup.</h1>
-          <p>Collez le site d’une entreprise. Webbby lit la page et ressort les signaux utiles pour un commercial : fit B2B, client cible, preuve d’achat, angle d’approche et niveau de confiance.</p>
-          <div className="hero-actions"><a className="primary" href="#demo">Analyser un prospect <ArrowRight size={18}/></a><a className="secondary" href="#features">Voir les signaux</a></div>
-          <div className="proof-row"><span><CheckCircle2 size={16}/> Résumé actionnable</span><span><Target size={16}/> Signaux de qualification</span><span><Globe2 size={16}/> Depuis le site public</span></div>
+          <span className="eyebrow"><Sparkles size={14}/> Brief sales en 10 secondes</span>
+          <h1>Un brief sales en 10 secondes.</h1>
+          <p>Collez le site d'un prospect. Webbby lit la page et ressort les signaux qui comptent pour un commercial : fit B2B, profil acheteur, signaux d'achat, angle d'approche et preuves concrètes.</p>
+          <div className="hero-actions"><a className="primary" href="#demo">Analyser un site <ArrowRight size={18}/></a><a className="secondary" href="#features">Voir les signaux</a></div>
+          <div className="proof-row">
+            <span><CheckCircle2 size={16}/> Gratuit · Sans inscription</span>
+            <span><Target size={16}/> Résultat en &lt; 10 secondes</span>
+            <span><Globe2 size={16}/> Depuis n'importe quel site public</span>
+          </div>
         </div>
         <div className="hero-panel sales-panel" aria-label="Exemple d'analyse sales">
           <div className="lead-card hero-lead-card">
@@ -136,10 +140,10 @@ function App() {
       </section>
 
       <section className="trustbar">
-        <div><strong>5 min</strong><span>pour qualifier une liste courte</span></div>
+        <div><strong>10 s</strong><span>pour qualifier un prospect</span></div>
         <div><strong>12</strong><span>signaux personnalisables</span></div>
-        <div><strong>1 page</strong><span>résumé lisible pour l’équipe sales</span></div>
-        <div><strong>0</strong><span>copier-coller dans un chat</span></div>
+        <div><strong>1 page</strong><span>brief lisible pour l'équipe sales</span></div>
+        <div><strong>0</strong><span>recherche manuelle</span></div>
       </section>
 
       <section className="features" id="features">
@@ -160,11 +164,12 @@ function App() {
       <section className="demo" id="demo">
         <div className="section-head"><span className="eyebrow">Testez maintenant</span><h2>Qualifiez un prospect depuis son site</h2><p>Ajoutez les signaux que votre équipe utilise déjà pour décider qui contacter en priorité.</p></div>
         <form onSubmit={analyze} className="analyzer">
-          <label>Site du prospect<input value={url} onChange={e => setUrl(e.target.value)} placeholder="https://entreprise.com" required /></label>
-          <div className="criteria-head"><div><strong>Signaux à vérifier</strong><span>Exemples : fit B2B, cible, budget, intention d’achat, angle d’approche.</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>Ajouter un signal</button></div>
+          <label>Site du prospect<input value={url} onChange={e => setUrl(e.target.value)} placeholder="Collez le site de votre prospect... ex: https://acme.com" required /></label>
+          <div className="criteria-head"><div><strong>Signaux à vérifier</strong><span>Fit B2B, profil acheteur, signaux d'achat, angle d'approche, preuves.</span></div><button className="secondary small" type="button" onClick={() => setCriteria([...criteria, { key: '', label: '', type: 'string' }])}><Plus size={16}/>Ajouter un signal</button></div>
           <div className="field-list">{criteria.map((field, index) => <FieldRow key={index} field={field} index={index} update={update} remove={remove} />)}</div>
           {error && <div className="error">{error}</div>}
-          <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? 'Lecture du site…' : 'Obtenir le brief sales'}</button>
+          <button className="primary submit" disabled={loading} type="submit">{loading ? <Loader2 className="spin" size={18}/> : <Sparkles size={18}/>} {loading ? 'Lecture du site…' : 'Analyser ce site'}</button>
+          <p className="microcopy">Gratuit · Sans inscription · Résultat en moins de 10 secondes</p>
         </form>
         <ResultCard result={result} />
       </section>
@@ -185,7 +190,7 @@ function App() {
         <details><summary>Que se passe-t-il si le site est trop pauvre ?</summary><p>Webbby vous le signale au lieu d’inventer. Le brief reste basé sur les éléments réellement visibles sur le site.</p></details>
       </section>
 
-      <section className="final-cta"><h2>Transformez un site web en brief de prospection.</h2><p>Le bon compte, le bon angle, les bonnes preuves — avant le premier message.</p><a className="primary inverse" href="#demo">Qualifier un prospect</a></section>
+      <section className="final-cta"><h2>Un brief sales en 10 secondes, sans recherche manuelle.</h2><p>Collez un site → Webbby vous sort les signaux qui comptent. Gratuit, sans inscription.</p><a className="primary inverse" href="#demo">Analyser un site</a></section>
       <footer><strong>Webbby</strong><span>Qualification commerciale depuis les sites web publics</span></footer>
     </main>
   );
