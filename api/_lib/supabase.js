@@ -9,6 +9,7 @@ export function getSupabase() {
   if (client) return client;
   if (!supabaseUrl || !supabaseServiceKey) return null;
   client = createClient(supabaseUrl, supabaseServiceKey, {
+    db: { schema: 'webbby' },
     auth: { persistSession: false, autoRefreshToken: false }
   });
   return client;
